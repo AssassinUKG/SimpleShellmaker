@@ -49,7 +49,7 @@ char replace_IPPORT(struct ipDetails ipStruct, char *cmd){
     char intbuff[5];
     _itoa(ipStruct.port, intbuff, 10);
     rep = replace_str(rep, "{PORT}",intbuff );
-    printf("\n\n[+]\n%s\n\n", rep);
+    printf(C_GREEN "\n\n[+]\n%s\n\n" C_RESET, rep);
 }
 
 
@@ -61,7 +61,7 @@ char replace_IPPORT1(struct ipDetails ipStruct, struct ShellStruct *shells, int 
     char intbuff[5];
     _itoa(ipStruct.port, intbuff, 10);
     rep = replace_str(rep, "{PORT}",intbuff );
-    printf("[+] %s\n\n%s\n\n",shells[choice].name, rep);
+    printf(C_GREEN "[+] %s\n"C_RESET "\n%s\n\n",shells[choice].name, rep);
 }
 
 
@@ -131,7 +131,7 @@ C_RED " :   : :  : :: ::      :    " C_GREEN "    :      :     :   : :   :   :::
     
     // Check cmdargs for ip and port
     if (argc < 2) {
-        printf(C_RED "\n[+] Usage: IP PORT (10.10.10.10 8888)\n" C_RESET);
+        printf(C_RED "\n[+] Usage: IP PORT (10.10.10.10 8888)\n\n" C_RESET);
         exit(0);
     }
     //Make a pointer to the host address
