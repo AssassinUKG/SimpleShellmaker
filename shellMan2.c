@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <winsock.h>
+#include <ctype.h>
 //colors!!
 #define C_RED     "\x1b[31m"
 #define C_GREEN   "\x1b[32m"
@@ -46,8 +46,9 @@ struct ShellStruct {
 char replace_IPPORT(struct ipDetails, char *cmd);
 char replace_IPPORT(struct ipDetails ipStruct, char *cmd){
     char *rep = replace_str(cmd, "{IP}", ipStruct.hostname);
-    char intbuff[5];
-    _itoa(ipStruct.port, intbuff, 10);
+    char intbuff[7];
+    snprintf(intbuff, sizeof(intbuff), "d", ipStruct.port);
+   // itoa(ipStruct.port, intbuff, 10);
     rep = replace_str(rep, "{PORT}",intbuff );
     printf(C_GREEN "\n\n[+]\n%s\n\n" C_RESET, rep);
 }
@@ -59,7 +60,8 @@ char replace_IPPORT1(struct ipDetails ipStruct, struct ShellStruct *shells, int 
     cmd = shells[choice].command;
     char *rep = replace_str(cmd, "{IP}", ipStruct.hostname);
     char intbuff[5];
-    _itoa(ipStruct.port, intbuff, 10);
+    snprintf(intbuff,sizeof(intbuff), "%d",ipStruct.port );
+   // itoa(ipStruct.port, intbuff, 10);
     rep = replace_str(rep, "{PORT}",intbuff );
     printf(C_GREEN "[+] %s\n"C_RESET "\n%s\n\n",shells[choice].name, rep);
 }
